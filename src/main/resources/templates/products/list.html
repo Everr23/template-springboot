@@ -1,0 +1,55 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products List</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <div class="d-flex justify-content-between mx-2">
+        <h2>List of Products</h2>
+        <a th:href="@{/products/create}"
+          ><button type="button" class="btn btn-success">Create</button></a
+        >
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Description</th>
+            <th scope="col" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product :${products}">
+            <th scope="row" th:text="${product.id}"></th>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stock}"></td>
+            <td th:text="${product.description}"></td>
+            <td class="d-flex justify-content-evenly">
+              <a
+                class="btn btn-primary"
+                th:href="@{/products/{productId}/edit(productId=${product.id})}"
+                >Edit</a
+              >
+              <a
+                class="btn btn-danger"
+                th:href="@{/products/{productId}/delete(productId=${product.id})}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

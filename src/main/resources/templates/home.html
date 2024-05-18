@@ -1,0 +1,35 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <h2>Modules</h2>
+      <div>
+        <ul class="list-group list-group-flush ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/users}"><h4>Users</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/products}"><h4>Products</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/bills}"><h4>Bills</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/billsdetails}"
+              ><h4>Bills Details</h4></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

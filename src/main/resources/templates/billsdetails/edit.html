@@ -1,0 +1,92 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Bill Details</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <form
+        role="form"
+        method="post"
+        th:action="@{/billsdetails/{billDetailId}/edit(billDetailId=${billDetail.id})}"
+        th:object="${billDetail}"
+      >
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="bill">Bill</label>
+            <select
+              id="bill"
+              name="bill"
+              th:field="*{bill}"
+              class="form-select"
+            >
+              <option selected th:value="null">Seleccione una factura</option>
+              <option
+                th:each="bll : ${bills}"
+                th:text="${bll.id}+' : '+${bll.user.name}+' - '+${bll.user.lastname}"
+                th:value="${bll.id}"
+              ></option>
+            </select>
+            <p
+              th:if="${#fields.hasErrors('bill')}"
+              class="text-danger"
+              th:errors="*{bill}"
+            ></p>
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="product">Product</label>
+            <select
+              id="product"
+              name="product"
+              th:field="*{product}"
+              class="form-select"
+            >
+              <option selected th:value="null">Seleccione un producto</option>
+              <option
+                th:each="prd : ${products}"
+                th:text="${prd.name}"
+                th:value="${prd.id}"
+              ></option>
+            </select>
+            <p
+              th:if="${#fields.hasErrors('product')}"
+              class="text-danger"
+              th:errors="*{product}"
+            ></p>
+          </div>
+        </div>
+        <div class="form-group col-md-6 mb-4">
+          <label for="quantity">Quantity</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            name="quantity"
+            th:field="*{quantity}"
+            placeholder="Quantity"
+          />
+          <p
+            th:if="${#fields.hasErrors('quantity')}"
+            class="text-danger"
+            th:errors="*{quantity}"
+          ></p>
+        </div>
+        <div class="d-flex col-md-6">
+          <a th:href="@{/billsdetails}"
+            ><button type="button" class="btn btn-danger me-3">
+              Cancel
+            </button></a
+          >
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

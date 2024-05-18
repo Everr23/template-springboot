@@ -1,0 +1,55 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bills List</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <div class="d-flex justify-content-between mx-2">
+        <h2>List of Bills</h2>
+        <a th:href="@{/bills/create}"
+          ><button type="button" class="btn btn-success">Create</button></a
+        >
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Total</th>
+            <th scope="col">Disccount</th>
+            <th scope="col">Comments</th>
+            <th scope="col" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="bill :${bills}">
+            <th scope="row" th:text="${bill.id}"></th>
+            <td th:text="${bill.user.name}+' '+${bill.user.lastname}"></td>
+            <td th:text="${bill.total}"></td>
+            <td th:text="${bill.disccount}"></td>
+            <td th:text="${bill.comments}"></td>
+            <td class="d-flex justify-content-evenly">
+              <a
+                class="btn btn-primary"
+                th:href="@{/bills/{billId}/edit(billId=${bill.id})}"
+                >Edit</a
+              >
+              <a
+                class="btn btn-danger"
+                th:href="@{/bills/{billId}/delete(billId=${bill.id})}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

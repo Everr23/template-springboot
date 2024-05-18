@@ -1,0 +1,8 @@
+(instalar dependecias o carpeta target)
+mvn clean install
+
+(antes de corer ejecutar esto para limpiar target)
+mvn clean compile
+
+(Correr proyecto)
+mvn spring-boot:run

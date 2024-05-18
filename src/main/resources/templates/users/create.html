@@ -1,0 +1,97 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create User</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <form
+        role="form"
+        method="post"
+        th:action="@{/users/create}"
+        th:object="${user}"
+      >
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              th:field="*{name}"
+              placeholder="Name"
+            />
+            <p
+              th:if="${#fields.hasErrors('name')}"
+              class="text-danger"
+              th:errors="*{name}"
+            ></p>
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="lastname">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              name="lastname"
+              th:field="*{lastname}"
+              placeholder="Last Name"
+            />
+            <p
+              th:if="${#fields.hasErrors('lastname')}"
+              class="text-danger"
+              th:errors="*{lastname}"
+            ></p>
+          </div>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            th:field="*{email}"
+            placeholder="Email"
+          />
+          <p
+            th:if="${#fields.hasErrors('email')}"
+            class="text-danger"
+            th:errors="*{email}"
+          ></p>
+        </div>
+        <div class="form-group col-md-6 mb-4">
+          <label for="phone">Phone</label>
+          <input
+            type="number"
+            class="form-control"
+            id="phone"
+            name="phone"
+            th:field="*{phone}"
+            placeholder="Phone"
+          />
+          <p
+            th:if="${#fields.hasErrors('phone')}"
+            class="text-danger"
+            th:errors="*{phone}"
+          ></p>
+        </div>
+        <div class="d-flex col-md-6">
+          <a th:href="@{/users}"
+            ><button type="button" class="btn btn-danger me-3">
+              Cancel
+            </button></a
+          >
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

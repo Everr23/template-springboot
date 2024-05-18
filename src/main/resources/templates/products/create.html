@@ -1,0 +1,97 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Product</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <form
+        role="form"
+        method="post"
+        th:action="@{/products/create}"
+        th:object="${product}"
+      >
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              th:field="*{name}"
+              placeholder="Name"
+            />
+            <p
+              th:if="${#fields.hasErrors('name')}"
+              class="text-danger"
+              th:errors="*{name}"
+            ></p>
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              th:field="*{price}"
+              placeholder="Price"
+            />
+            <p
+              th:if="${#fields.hasErrors('price')}"
+              class="text-danger"
+              th:errors="*{price}"
+            ></p>
+          </div>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+          <label for="stock">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            name="stock"
+            th:field="*{stock}"
+            placeholder="0"
+          />
+          <p
+            th:if="${#fields.hasErrors('stock')}"
+            class="text-danger"
+            th:errors="*{stock}"
+          ></p>
+        </div>
+        <div class="form-group col-md-6 mb-4">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            name="description"
+            th:field="*{description}"
+            placeholder="Description"
+          />
+          <p
+            th:if="${#fields.hasErrors('description')}"
+            class="text-danger"
+            th:errors="*{description}"
+          ></p>
+        </div>
+        <div class="d-flex col-md-6">
+          <a th:href="@{/products}"
+            ><button type="button" class="btn btn-danger me-3">
+              Cancel
+            </button></a
+          >
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

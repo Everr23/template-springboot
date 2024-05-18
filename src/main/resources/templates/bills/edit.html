@@ -1,0 +1,98 @@
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Bill</title>
+  </head>
+
+  <body layout:fragment="page" class="d-flex flex-column">
+    <div class="container px-5 my-5">
+      <form
+        role="form"
+        method="post"
+        th:action="@{/bills/{billId}/edit(billId=${bill.id})}"
+        th:object="${bill}"
+      >
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="name">Disccount</label>
+            <input
+              type="number"
+              class="form-control"
+              id="disccount"
+              name="disccount"
+              th:field="*{disccount}"
+              placeholder="Disccount"
+            />
+            <p
+              th:if="${#fields.hasErrors('disccount')}"
+              class="text-danger"
+              th:errors="*{disccount}"
+            ></p>
+          </div>
+          <div class="form-group col-md-6 mb-3">
+            <label for="total">Total</label>
+            <input
+              type="number"
+              class="form-control"
+              id="total"
+              name="total"
+              th:field="*{total}"
+              placeholder="Total"
+            />
+            <p
+              th:if="${#fields.hasErrors('total')}"
+              class="text-danger"
+              th:errors="*{total}"
+            ></p>
+          </div>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+          <label for="comments">Comments</label>
+          <input
+            type="text"
+            class="form-control"
+            id="comments"
+            name="comments"
+            th:field="*{comments}"
+            placeholder="Comments"
+          />
+          <p
+            th:if="${#fields.hasErrors('comments')}"
+            class="text-danger"
+            th:errors="*{comments}"
+          ></p>
+        </div>
+        <div class="form-group col-md-6 mb-4">
+          <label for="user">User</label>
+          <select id="user" name="user" th:field="*{user}" class="form-select">
+            <option selected th:value="null">Seleccione un usario</option>
+            <option
+              th:each="usr : ${users}"
+              th:text="${usr.name}+' '+${usr.lastname}"
+              th:value="${usr.id}"
+            ></option>
+          </select>
+          <p
+            th:if="${#fields.hasErrors('user')}"
+            class="text-danger"
+            th:errors="*{user}"
+          ></p>
+        </div>
+        <div class="d-flex col-md-6">
+          <a th:href="@{/bills}"
+            ><button type="button" class="btn btn-danger me-3">
+              Cancel
+            </button></a
+          >
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
