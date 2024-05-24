@@ -15,4 +15,7 @@ public interface BillService {
     void updateBill(BillDto bill);
 
     void delete(Long billId);
+
+    Integer getTotalBill(Long billId);
+
 }

@@ -25,4 +25,5 @@ public class BillDto {
     @NotNull(message = "User should not be empty")
     private User user;
     private List<BillDetailDto> billDetails;
+    private Integer totalSold;
 }

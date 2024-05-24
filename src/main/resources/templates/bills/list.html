@@ -32,7 +32,7 @@
           <tr th:each="bill :${bills}">
             <th scope="row" th:text="${bill.id}"></th>
             <td th:text="${bill.user.name}+' '+${bill.user.lastname}"></td>
-            <td th:text="${bill.total}"></td>
+            <td th:text="${bill.totalSold}"></td>
             <td th:text="${bill.disccount}"></td>
             <td th:text="${bill.comments}"></td>
             <td class="d-flex justify-content-evenly">

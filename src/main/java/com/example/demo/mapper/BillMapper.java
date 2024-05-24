@@ -13,6 +13,7 @@ public class BillMapper {
                 .id(billDto.getId())
                 .disccount(billDto.getDisccount())
                 .total(billDto.getTotal())
+                .totalSold(billDto.getTotalSold())
                 .comments(billDto.getComments())
                 .user(billDto.getUser())
                 .build();
@@ -23,6 +24,7 @@ public class BillMapper {
                 .id(bill.getId())
                 .disccount(bill.getDisccount())
                 .total(bill.getTotal())
+                .totalSold(bill.getTotalSold())
                 .comments(bill.getComments())
                 .user(bill.getUser())
                 .billDetails(bill.getBillDetails()

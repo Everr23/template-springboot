@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +35,9 @@ public class Bill {
     private Integer disccount;
     private Integer total;
     private String comments;
+
+    @Transient
+    private Integer totalSold;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)

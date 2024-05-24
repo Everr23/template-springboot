@@ -13,12 +13,14 @@ import com.example.demo.repository.BillRepository;
 import com.example.demo.repository.UserRepository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import static com.example.demo.mapper.BillMapper.mapToBill;
 import static com.example.demo.mapper.BillMapper.mapToBillDto;
+import static com.example.demo.mapper.BillDetailMapper.mapToBillDetailDto;;
 
 @Service
 @Transactional
@@ -37,7 +39,11 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<BillDto> findAllBills() {
         List<Bill> bills = billRepository.findAll();
-        return bills.stream().map((bill) -> mapToBillDto(bill)).collect(Collectors.toList());
+
+        return bills.stream().map((bill) -> {
+            bill.setTotalSold(this.getTotalBill(bill.getId()));
+            return mapToBillDto(bill);
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -68,6 +74,19 @@ public class BillServiceImpl implements BillService {
         if (billsDetails.isEmpty()) {
             billRepository.deleteById(billId);
         }
+    }
+
+    @Override
+    public Integer getTotalBill(Long billId) {
+        Integer sum = 0;
+        Bill bill = billRepository.findById(billId).get();
+        List<BillDetail> billsDetails = billDetailRepository.findByBill(bill);
+
+        for (BillDetail billDetail : billsDetails) {
+            sum += billDetail.getQuantity() * billDetail.getProduct().getPrice();
+        }
+
+        return sum;
     }
 
 }
